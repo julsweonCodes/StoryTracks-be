@@ -22,7 +22,7 @@ public class BlogImgEntity {
     @Column(nullable = false, name="img_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imgId;
-    
+
     @Column(name="geo_lat", length = 20)
     private String geoLat;
 
