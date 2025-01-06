@@ -21,8 +21,8 @@ public class BlogImgDTO {
     private Long postId;
     private String geoLat;
     private String geoLong;
-    private String imgPath;
-    private MultipartFile imgFile;
+    private String fileName;
+    //    private MultipartFile imgFile;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime imgDtm;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -32,12 +32,12 @@ public class BlogImgDTO {
     private String thumbYn;
 //    private BlogPostEntity blogPost;
 
-    public BlogImgDTO(Long imgId, Long postId, String geoLat, String geoLong, String imgPath, LocalDateTime imgDtm, String thumbYn) {
+    public BlogImgDTO(Long imgId, Long postId, String geoLat, String geoLong, String fileName, LocalDateTime imgDtm, String thumbYn) {
         this.imgId = imgId;
         this.postId = postId;
         this.geoLat = geoLat;
         this.geoLong = geoLong;
-        this.imgPath = imgPath;
+        this.fileName = fileName;
         this.imgDtm = imgDtm;
         this.thumbYn = thumbYn;
     }
@@ -50,7 +50,8 @@ public class BlogImgDTO {
         blogImgDTO.setPostId(blogImgEntity.getBlogPost().getPostId());
         blogImgDTO.setGeoLat(blogImgEntity.getGeoLat());
         blogImgDTO.setGeoLong(blogImgEntity.getGeoLong());
-        blogImgDTO.setImgPath(blogImgEntity.getImgPath());
+//        blogImgDTO.setImgPath(blogImgEntity.getImgPath());
+        blogImgDTO.setFileName(blogImgEntity.getImgPath());
         blogImgDTO.setImgDtm(blogImgEntity.getImgDtm());
         blogImgDTO.setRgstDtm(blogImgEntity.getRgstDTm());
         blogImgDTO.setThumbYn(blogImgEntity.getThumbYn());
