@@ -47,6 +47,17 @@ public class BlogPostDTO {
         this.aiGenText = aiGenText;
     }
 
+
+    public BlogPostDTO(String title, String ogText, String aiGenText) {
+
+        this.title = title;
+
+        this.ogText = ogText;
+
+        this.aiGenText = aiGenText;
+
+    }
+
     @Description(value="전체 조회 시 대표이미지 정보만 가져옴")
     public static BlogPostDTO toPostDTO(BlogPostEntity blogPostEntity, List<BlogImgDTO> imgDTOList) {
 //        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMddkkmmss");

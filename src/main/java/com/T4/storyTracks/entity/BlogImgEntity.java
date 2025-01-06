@@ -51,6 +51,7 @@ public class BlogImgEntity {
 
 
     public static BlogImgEntity toImgEntity(BlogImgDTO imgDTO, Long postId, String fileUrl) {
+
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         BlogImgEntity imgEntity = new BlogImgEntity();
         imgEntity.setImgPath(imgDTO.getImgPath());

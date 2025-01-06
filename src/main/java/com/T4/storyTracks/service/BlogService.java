@@ -1,5 +1,9 @@
 package com.T4.storyTracks.service;
 
+import com.T4.storyTracks.dto.BlogImgDTO;
+import com.T4.storyTracks.dto.BlogListPostDTO;
+import com.T4.storyTracks.dto.BlogPostDTO;
+import com.T4.storyTracks.dto.ImgMetaDTO;
 import com.T4.storyTracks.dto.*;
 import com.T4.storyTracks.entity.BlogImgEntity;
 import com.T4.storyTracks.entity.BlogPostEntity;
@@ -41,9 +45,26 @@ public class BlogService {
         return blogRepository.save(BlogPostEntity.toPostEntity(newPostDTO)).getPostId();
     }
 
-
     //aiGenTextList를 생성하는 함수
+    public String genText(String ogText, String geoLat, String geoLong, int length) {
+        String prompt = "";
+        prompt = "Below is a review written by a traveler. Based on this review, write a blog post in the appropriate format.\nThe latitude of the travel destination is "
+                + geoLat
+                + ", and the longitude is "
+                + geoLong
+                + ". Write in Markdown syntax.\n\n"
+                + ogText;
 
+        System.out.println("prompt");
+        System.out.println(prompt);
+
+        String text = service.getCompletion(prompt);
+        System.out.println("text");
+        System.out.println(text);
+
+        return text;
+    }
+  
     public List<BlogImgDTO> getBlogImgList(Long postId) {
         List<BlogImgEntity> imgEntityList = blogImgRepository.findByBlogPostPostId(postId);
         if (imgEntityList.isEmpty()) {
@@ -72,53 +93,61 @@ public class BlogService {
 
         return postDTO;
     }
+//    public List<BlogImgDTO> findImgAll() {
+//        List<BlogImgEntity> imgEntityList = blogImgRepository.find();
+//        List<BlogImgDTO> blogImgDTOList = new ArrayList<>();
+//        for (BlogImgEntity imgEntity : imgEntityList) {
+//            blogImgDTOList.add(BlogImgDTO.toImgDTO(imgEntity));
+//        }
+//        return blogImgDTOList;
+//    }
+public Map<String, String> createPost(ImgMetaDTO imgMetaDTO, String ogText) { //
+    //System.out.println(imgMetaDTO.getGeoLat()+", "+imgMetaDTO.getGeoLong());
+    int[] length = {200, 350, 450};
+    Map<String, String> genAIList = new HashMap<>(3);
 
-    public Map<String, String> createPost(ImgMetaDTO imgMetaDTO, String ogText) { //
-        //System.out.println(imgMetaDTO.getGeoLat()+", "+imgMetaDTO.getGeoLong());
-        int[] length = {200, 350, 450};
-        Map<String, String> genAIList = new HashMap<>(3);
-
-        for (int i=0; i<length.length; i++){
-            String tmp = "genRes"+Integer.toString(i+1);
-            genAIList.put(tmp, genText(ogText, imgMetaDTO.getGeoLat(), imgMetaDTO.getGeoLong(), length[i]));
-        }
-        return genAIList;
+    for (int i=0; i<length.length; i++){
+        String tmp = "genRes"+Integer.toString(i+1);
+        genAIList.put(tmp, genText(ogText, imgMetaDTO.getGeoLat(), imgMetaDTO.getGeoLong(), length[i]));
     }
+    return genAIList;
+}
 
-    public String genText(String ogText, String geoLat, String geoLong, int length) {
-        String prompt = "";
-        prompt = """
-                You are an expert blog writer specializing in creating daily journal-style blog posts for public sharing. Based on the provided image metadata and user description, generate three versions of a blog post:
-                                
-                **Content Requirements:**
-                - Include the location and time keywords from the metadata in the content.
-                - Write in a friendly and descriptive tone, as if sharing a daily journal entry.
-                - Describe the location visited, the activities done, how they were done, and the emotions felt.
-                - Follow a logical time sequence (e.g., what happened first, next, and so on).
-                - Write in the structure of an introduction, main body, and conclusion.
-                                
-                **Output Structure:**
-                1. **Introduction:** Briefly introduce the setting and context.
-                2. **Main Body:** Narrate the experience in detail, including actions, observations, and emotions.
-                3. **Conclusion:** Summarize the experience and its personal significance.
-                """
-                +
-                "**Must Include Input Data:**\n"
-                + "- location(inferred through the given latitude and longitude): latitude = " + geoLat + ", longitude = " + geoLong
-                + "\n- base context: " + ogText
-                + """
-                **Output Format:**
-                - Markdown language
-                - 
-                - """ + length + "words"
-                +
-                """
-                
-                Be creative but remain consistent with the input data.
-                """;
-        String text = service.getCompletion(prompt);
-        return text; //prompt.substring(0, length); // test용
-    }
+//    public String genText(String ogText, String geoLat, String geoLong, int length) {
+//        String prompt = "";
+//        prompt = """
+//                You are an expert blog writer specializing in creating daily journal-style blog posts for public sharing. Based on the provided image metadata and user description, generate three versions of a blog post:
+//
+//                **Content Requirements:**
+//                - Include the location and time keywords from the metadata in the content.
+//                - Write in a friendly and descriptive tone, as if sharing a daily journal entry.
+//                - Describe the location visited, the activities done, how they were done, and the emotions felt.
+//                - Follow a logical time sequence (e.g., what happened first, next, and so on).
+//                - Write in the structure of an introduction, main body, and conclusion.
+//
+//                **Output Structure:**
+//                1. **Introduction:** Briefly introduce the setting and context.
+//                2. **Main Body:** Narrate the experience in detail, including actions, observations, and emotions.
+//                3. **Conclusion:** Summarize the experience and its personal significance.
+//                """
+//                +
+//                "**Must Include Input Data:**\n"
+//                + "- location(inferred through the given latitude and longitude): latitude = " + geoLat + ", longitude = " + geoLong
+//                + "\n- base context: " + ogText
+//                + """
+//                **Output Format:**
+//                - Markdown language
+//                -
+//                - """ + length + "words"
+//                +
+//                """
+//
+//                Be creative but remain consistent with the input data.
+//                """;
+//        String text = service.getCompletion(prompt);
+//        return text; //prompt.substring(0, length); // test용
+//    }
+
 
     public String saveImgS3(BlogImgDTO imgDTO, Long postId) {
         try {

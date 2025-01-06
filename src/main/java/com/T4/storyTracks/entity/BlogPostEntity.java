@@ -55,6 +55,7 @@ public class BlogPostEntity {
         blogImg.setBlogPost(this);
     }
 
+
     public static BlogPostEntity toPostEntity(BlogPostDTO postDTO) {
         BlogPostEntity postEntity = new BlogPostEntity();
 
