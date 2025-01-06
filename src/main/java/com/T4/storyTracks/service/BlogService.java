@@ -28,10 +28,20 @@ public class BlogService {
 
     public List<BlogListPostDTO> findAll() {
         List<BlogPostEntity> blogPostEntityList= blogRepository.findAll();
+        for(BlogPostEntity postEntity : blogPostEntityList) {
+            System.out.println(postEntity.getPostId() + "  " + postEntity.getTitle());
+        }
+
+        Optional<BlogImgEntity> imgEntity;
         List<BlogListPostDTO> blogPostDTOList =new ArrayList<>();
         for (BlogPostEntity postEntity: blogPostEntityList) {
-            blogPostDTOList.add(BlogListPostDTO.toPostListDTO(postEntity, blogImgRepository.findByBlogPostPostIdAndThumbYn(postEntity.getPostId(), "Y")
-                    .orElseThrow(() -> new IllegalArgumentException("blogImgEntity no thumbImg"))));
+            //imgEntity = blogImgRepository.findByBlogPostPostIdAndThumbYn(postEntity.getPostId(), "Y");
+            imgEntity = blogImgRepository.findFirstByBlogPostPostId(postEntity.getPostId());
+            try {
+                blogPostDTOList.add(BlogListPostDTO.toBlogPostEntity(postEntity, imgEntity.get()));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
         return blogPostDTOList;
     }

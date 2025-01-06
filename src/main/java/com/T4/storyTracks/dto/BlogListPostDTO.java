@@ -2,6 +2,7 @@ package com.T4.storyTracks.dto;
 
 import com.T4.storyTracks.entity.BlogImgEntity;
 import com.T4.storyTracks.entity.BlogPostEntity;
+import com.T4.storyTracks.service.S3Service;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,8 +48,10 @@ public class BlogListPostDTO {
     }
 
     @Description(value="전체 조회 시 대표이미지 정보만 가져옴")
-    public static BlogListPostDTO toPostListDTO(BlogPostEntity blogPostEntity, BlogImgEntity thumbImgEntity) {
+    public static BlogListPostDTO toBlogPostEntity(BlogPostEntity blogPostEntity, BlogImgEntity thumbImgEntity) {
 //        SimpleDateFormat dtFormat = new SimpleDateFormat("yyyyMMddkkmmss");
+//        System.out.println("BlogPostEntity 진입");
+        S3Service s3Service = new S3Service();
 
         BlogListPostDTO blogPostDTO = new BlogListPostDTO();
         blogPostDTO.setPostId(blogPostEntity.getPostId());
@@ -66,7 +69,8 @@ public class BlogListPostDTO {
 //        blogPostDTO.setThumbGeoLong(thumbImgEntity.getGeoLong());
         Map<String, String> tmp = new HashMap<>(4);
         tmp.put("thumbImgId",thumbImgEntity.getImgId().toString());
-        tmp.put("thumbImgPath",thumbImgEntity.getImgPath());
+//        tmp.put("thumbImgPath",thumbImgEntity.getImgPath());
+        tmp.put("thumbImgPath", s3Service.getFileUrl(thumbImgEntity.getImgPath()));
         tmp.put("thumbGeoLat",thumbImgEntity.getGeoLat());
         tmp.put("thumbGeoLong",thumbImgEntity.getGeoLong());
         blogPostDTO.setThumbHash(tmp);

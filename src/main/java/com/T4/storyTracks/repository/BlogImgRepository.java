@@ -11,8 +11,9 @@ import java.util.Optional;
 
 public interface BlogImgRepository extends JpaRepository<BlogImgEntity, Long> {
 
-    Optional<BlogImgEntity> findByBlogPostPostIdAndThumbYn(@Param("postId") Long postId, @Param("thumbYn") String thumbYn);
+//    Optional<BlogImgEntity> findByBlogPostPostIdAndThumbYn(@Param("postId") Long postId, @Param("thumbYn") String thumbYn);
 
     List<BlogImgEntity> findByBlogPostPostId(@Param("postId") Long postId);
 
+    Optional<BlogImgEntity> findFirstByBlogPostPostId(@Param("postId") Long postId);
 }
