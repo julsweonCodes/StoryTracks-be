@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+# database
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://storytracks-db.ctgwc28ags9c.us-west-2.rds.amazonaws.com:3306/mydatabase?serverTimezone=America/Vancouver&characterEncoding=UTF-8
+    username: admin
+    password: password1234
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        storage_engine: innodb
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show_sql: true
+    logging.level:
+      org.hibernate.SQL: debug
+
+gemini:
+  baseurl: https://generativelanguage.googleapis.com
+googleai:
+  api:
+    key: AIzaSyB9pHdfKH_1euOpv1kPrfepDUBoeoMtGwQ
