@@ -67,7 +67,6 @@ public class BlogController {
 //        return new ResponseEntity<>(postId, HttpStatus.OK);
     }
 
-
 //    //프론트에서 위도 경도, 사용자 글 받기 - generate content 버튼 클릭 시 ?
 //    @PostMapping("/saveImg")
 //    public ResponseEntity<BlogImgEntity> saveLocation(@RequestBody BlogImgDTO request) {
@@ -96,23 +95,6 @@ public class BlogController {
 //        for (int len : length) {
 //            aiGenTextList.add(blogService.genText(ogText, geoLag, geoLong, len));
 //        }
-        genAIList = blogService.createPost(imgMetaDTO, genInputDTO.getOgText());
-        return new ResponseEntity<>(genAIList, HttpStatus.OK);
-    }
 
-    @PostMapping("/save")
-    public void savePost(@RequestBody NewPostDTO newPostDTO) {
-        BlogPostDTO postDTO = new BlogPostDTO(newPostDTO.getTitle(), newPostDTO.getOgText(), newPostDTO.getAiGenText());
-        Long postId = blogService.savePost(postDTO);
-        String imgUrl = "";
-        List<Map<String, String>> imgSaveList = new ArrayList<>();
-        for (BlogImgDTO imgDTO : newPostDTO.getImgSaveList()) {
-            imgUrl = blogService.saveImgS3(imgDTO, postId);
-            blogService.saveImgList(imgDTO, postId, imgUrl);
-        }
-
-
-//        return new ResponseEntity<>(postId, HttpStatus.OK);
-    }
 
 }
