@@ -40,16 +40,16 @@ public class BlogPostDTO {
         this.rgstDtm = rgstDtm;
         //this.chngDtm = chngDtm;
     }
-
-
-    public BlogPostDTO(String title, String ogText, String aiGenText) {
-
+    public BlogPostDTO(Long postId, String title, String ogText, String aiGenText) {
         this.title = title;
-
         this.ogText = ogText;
-
         this.aiGenText = aiGenText;
-
+        this.postId = postId;
+    }
+    public BlogPostDTO(String title, String ogText, String aiGenText) {
+        this.title = title;
+        this.ogText = ogText;
+        this.aiGenText = aiGenText;
     }
 
     @Description(value="전체 조회 시 대표이미지 정보만 가져옴")

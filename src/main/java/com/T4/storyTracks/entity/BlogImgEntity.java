@@ -1,12 +1,15 @@
 package com.T4.storyTracks.entity;
 
 import com.T4.storyTracks.dto.BlogImgDTO;
+import com.T4.storyTracks.dto.BlogPostDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -32,8 +35,8 @@ public class BlogImgEntity {
     private LocalDateTime imgDtm;
 
     @Column(name="rgst_dtm")
-//    @CreationTimestamp
-//    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime rgstDTm;
 
     @Column(name="thumb_yn")
@@ -47,25 +50,15 @@ public class BlogImgEntity {
     private BlogPostEntity blogPost;
 
 
-    public static BlogImgEntity toImgEntity(BlogImgDTO imgDTO, Long postId, String fileUrl) {
-
+    public static BlogImgEntity toImgEntity(BlogImgDTO imgDTO, BlogPostEntity postEntity) {
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
         BlogImgEntity imgEntity = new BlogImgEntity();
-
-        imgEntity.setImgPath(imgDTO.getImgPath());
-
+        imgEntity.setImgPath(imgDTO.getFileName());
         imgEntity.setGeoLat(imgDTO.getGeoLat());
-
         imgEntity.setGeoLong(imgDTO.getGeoLong());
-
         imgEntity.setImgDtm(imgDTO.getImgDtm());
-
         imgEntity.setThumbYn(imgDTO.getThumbYn());
-
-
-
+        imgEntity.setBlogPost(postEntity);
         return imgEntity;
-
     }
 }
