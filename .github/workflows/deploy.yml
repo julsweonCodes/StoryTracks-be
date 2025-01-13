@@ -1,0 +1,56 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸쉬될 때만 실행
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 저장소 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Java 17 설정
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'  # OpenJDK의 Temurin 배포판
+          java-version: '17'
+
+      # 3. Gradle 캐시 설정
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 4. Gradle 빌드
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+
+      # 5. EC2로 파일 전송
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@v0.1.8
+        with:
+          host: 'ec2-35-93-65-240.us-west-2.compute.amazonaws.com'
+          username: 'ubuntu'
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: build/libs/*.jar
+          target: ~/java-app/app.jar
+
+      # 6. EC2에서 애플리케이션 실행
+      - name: Run app on EC2
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: 'ec2-35-93-65-240.us-west-2.compute.amazonaws.com'
+          username: 'ubuntu'
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            pkill -f 'java -jar' || true
+            nohup java -jar ~/java-app/app.jar > ~/java-app/app.log 2>&1 &
