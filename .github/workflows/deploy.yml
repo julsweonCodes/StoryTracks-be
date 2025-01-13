@@ -43,6 +43,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: build/libs/*.jar
           target: ~/java-app/app.jar
+          command_timeout: 300  # 명령 시간 초과 설정
+          debug: true           # 디버깅 활성화
 
       # 6. EC2에서 애플리케이션 실행
       - name: Run app on EC2
