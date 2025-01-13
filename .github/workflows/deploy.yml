@@ -34,7 +34,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew bootJar
 
-      # 5. EC2로 파일 전송
+      # 5. Gradle 빌드 결과 확인
+      - name: Verify build artifacts
+        run: ls build/libs/
+
+      # 6. EC2로 파일 전송
       - uses: actions/checkout@v4
       - name: Copy files to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -55,7 +59,7 @@ jobs:
       #    source: build/libs/*.jar
       #    target: ~/java-app/app.jar
 
-      # 6. EC2에서 애플리케이션 실행
+      # 7. EC2에서 애플리케이션 실행
       - name: Run app on EC2
         uses: appleboy/ssh-action@v0.1.0
         with:
