@@ -51,6 +51,7 @@ jobs:
           target: ~/
 
       # 7. EC2에서 애플리케이션 실행
+      # script에 pkill -f 'java -jar' || true 는 삭제
       - name: Run app on EC2
         uses: appleboy/ssh-action@v0.1.7
         with:
