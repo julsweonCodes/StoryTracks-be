@@ -39,7 +39,7 @@ jobs:
         run: ls build/libs/
 
       # 6. EC2로 파일 전송
-      - uses: actions/checkout@v4
+      #- uses: actions/checkout@v4
       - name: Copy files to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
