@@ -8,19 +8,28 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 @Configuration
 public class AppConfig {
 
     @Bean
     public RestClient geminiRestClient() {
-        String baseUrl = "https://generativelanguage.googleapis.com";
-        String apiKey = "AIzaSyB9pHdfKH_1euOpv1kPrfepDUBoeoMtGwQ";
-        return RestClient.builder()
-                .baseUrl(baseUrl)
-                .defaultHeader("x-goog-api-key", apiKey)
-                .defaultHeader("Content-Type", "application/json")
-                .defaultHeader("Accept", "application/json")
-                .build();
+        Properties properties = new Properties();
+        try (FileInputStream input = new FileInputStream("config.properties")) {
+            properties.load(input);
+            return RestClient.builder()
+                    .baseUrl("https://generativelanguage.googleapis.com")
+                    .defaultHeader("x-goog-api-key", properties.getProperty("GEMINI_API_KEY"))
+                    .defaultHeader("Content-Type", "application/json")
+                    .defaultHeader("Accept", "application/json")
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Bean
