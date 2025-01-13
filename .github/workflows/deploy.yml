@@ -34,26 +34,12 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew bootJar
 
-      # 4-5. Gradle 빌드
-      - name: Run app on EC2
-        uses: appleboy/ssh-action@v0.1.0
-        with:
-          host: 'ec2-35-93-65-240.us-west-2.compute.amazonaws.com'
-          username: 'ubuntu'
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            echo "Starting app..."
-            ls -la
-            pkill -f 'java -jar' || true
-            nohup java -jar ~/java-app/app.jar > ~/java-app/app.log 2>&1 &
-          debug: true  # 디버깅 활성화
-
       # 5. EC2로 파일 전송
       - name: Copy files to EC2
         uses: appleboy/scp-action@v0.1.0
         with:
-          host: 'ec2-35-93-65-240.us-west-2.compute.amazonaws.com'
-          username: 'ubuntu'
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: build/libs/*.jar
           target: ~/java-app/app.jar
@@ -62,8 +48,8 @@ jobs:
       - name: Run app on EC2
         uses: appleboy/ssh-action@v0.1.0
         with:
-          host: 'ec2-35-93-65-240.us-west-2.compute.amazonaws.com'
-          username: 'ubuntu'
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             pkill -f 'java -jar' || true
