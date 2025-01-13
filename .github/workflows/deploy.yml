@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: '22'
           source: build/libs/*.jar
-          target: ~/java-app/app.jar
+          target: ~/
 
       #- name: Copy files to EC2
       #  uses: appleboy/scp-action@v0.1.0
