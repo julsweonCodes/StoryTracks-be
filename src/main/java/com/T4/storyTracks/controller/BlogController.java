@@ -25,7 +25,7 @@ import java.util.*;
 //@Controller
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/blog")
+@RequestMapping("/api/blog")
 public class BlogController {
 
     public final BlogRepository blogRepository;
