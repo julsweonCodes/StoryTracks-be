@@ -68,4 +68,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             pkill -f 'java -jar' || true
-            nohup java -jar ~/java-app/app.jar > ~/java-app/app.log 2>&1 &
+            nohup java -jar ~/storyTracks-0.0.1-SNAPSHOT.jar > ~/app.log 2>&1 &
