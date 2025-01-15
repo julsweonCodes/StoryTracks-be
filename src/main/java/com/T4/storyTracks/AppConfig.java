@@ -34,7 +34,7 @@ public class AppConfig {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.err.println("Unexpected error occurred : " + e.getMessage());
+            System.err.println("Unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
