@@ -1,17 +1,11 @@
 package com.T4.storyTracks;
 
-import lombok.Value;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
 @Configuration
 public class AppConfig {
@@ -40,7 +34,7 @@ public class AppConfig {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.err.println("Unexpected error occurred: " + e.getMessage());
+            System.err.println("Unexpected error occurred : " + e.getMessage());
             e.printStackTrace();
             return null;
         }
