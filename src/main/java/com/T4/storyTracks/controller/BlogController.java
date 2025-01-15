@@ -49,7 +49,36 @@ public class BlogController {
             @RequestPart("blogPost") NewPostDTO newPostDTO, // JSON 데이터 처리
             @RequestPart("files") List<MultipartFile> files // 파일 처리
             ) {
+        try {
+            BlogPostDTO postDTO = new BlogPostDTO(newPostDTO.getTitle(), newPostDTO.getOgText(), newPostDTO.getAiGenText());
+            BlogPostEntity postEntity = blogService.savePost(postDTO); // insert into post
 
+            List<Map<String, String>> imgSaveList = new ArrayList<>();
+            for (BlogImgDTO imgDTO : newPostDTO.getImgSaveList()) {
+                //imgUrl = blogService.saveImgS3(imgDTO, postId);
+                blogService.saveImgList(imgDTO, postEntity); // insert into imgs
+            }
+
+
+            for (MultipartFile file : files) {
+                System.out.println("파일 이름: " + file.getOriginalFilename());
+                System.out.println("파일 크기: " + file.getSize() + " bytes");
+                System.out.println("파일 타입: " + file.getContentType());
+                if (!file.isEmpty()) {
+                    try {
+                        String fileUrl = s3Service.uploadFile(file, "uploadtest1");
+                    } catch (IOException e) {
+                        return ResponseEntity.status(500).body("Failed to upload file: " + e.getMessage());
+                    }
+                }
+            }
+
+            return new ResponseEntity<>(postEntity.getPostId(), HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("File upload failed: " + e.getMessage());
+        }
+
+/*
         BlogPostDTO postDTO = new BlogPostDTO(newPostDTO.getTitle(), newPostDTO.getOgText(), newPostDTO.getAiGenText());
         BlogPostEntity postEntity = blogService.savePost(postDTO); // insert into post
 
@@ -72,7 +101,7 @@ public class BlogController {
             }
         }
 
-        return new ResponseEntity<>(postEntity.getPostId(), HttpStatus.OK);
+        return new ResponseEntity<>(postEntity.getPostId(), HttpStatus.OK);*/
     }
 
 }
