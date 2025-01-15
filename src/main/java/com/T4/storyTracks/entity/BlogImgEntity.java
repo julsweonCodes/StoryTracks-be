@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -32,12 +33,12 @@ public class BlogImgEntity {
     private String imgPath;
 
     @Column(name="img_dtm")
-    private LocalDateTime imgDtm;
+    private OffsetDateTime imgDtm;
 
     @Column(name="rgst_dtm")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime rgstDTm;
+    private OffsetDateTime rgstDTm;
 
     @Column(name="thumb_yn")
     private String thumbYn;

@@ -31,7 +31,7 @@ public class BlogPostEntity {
     private String ogText;
 
     @Lob
-    @Column(name="ai_gen_text")
+    @Column(name="ai_gen_text", columnDefinition = "TEXT")
     private String aiGenText;
 
     @Column(length = 64, nullable = false, name="password")

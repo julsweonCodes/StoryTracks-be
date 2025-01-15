@@ -43,6 +43,8 @@ public class BlogService {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println("return blogPostDTOList");
+        System.out.println(blogPostDTOList);
         return blogPostDTOList;
     }
     //글 정보 통째로 저장
@@ -104,7 +106,7 @@ public class BlogService {
 
     public String genText(String ogText, String geoLat, String geoLong, int length) {
         String prompt = "";
-        prompt = """
+        /*prompt = """
                 You are an expert blog writer specializing in creating daily journal-style blog posts for public sharing. Based on the provided image metadata and user description, generate three versions of a blog post:
                                 
                 **Content Requirements:**
@@ -132,8 +134,20 @@ public class BlogService {
                 """
                 
                 Be creative but remain consistent with the input data.
-                """;
+                """;*/
+        prompt = "Below is a review written by a traveler. Based on this review, write a blog post in the appropriate format.\nThe latitude of the travel destination is "
+                + geoLat
+                + ", and the longitude is "
+                + geoLong
+                + ". Write in Markdown syntax.\n\n"
+                + ogText;
+        System.out.println("prompt");
+        System.out.println(prompt);
+
         String text = service.getCompletion(prompt);
+        System.out.println("text");
+        System.out.println(text);
+
         return text; //prompt.substring(0, length); // test용
     }
 

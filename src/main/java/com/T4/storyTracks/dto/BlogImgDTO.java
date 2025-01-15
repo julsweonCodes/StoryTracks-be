@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -23,17 +24,21 @@ public class BlogImgDTO {
     private String geoLat;
     private String geoLong;
     private String fileName;
-//    private MultipartFile imgFile;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime imgDtm;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime rgstDtm;
-//    private String imgDtm;
-//    private String rgstDtm;
-    private String thumbYn;
-//    private BlogPostEntity blogPost;
+    // private MultipartFile imgFile;
+    // @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    // private LocalDateTime imgDtm;
+    private OffsetDateTime imgDtm;
 
-    public BlogImgDTO(Long imgId, Long postId, String geoLat, String geoLong, String fileName, LocalDateTime imgDtm, String thumbYn) {
+    // @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    // private LocalDateTime rgstDtm;
+    private OffsetDateTime rgstDtm;
+
+    // private String imgDtm;
+    // private String rgstDtm;
+    private String thumbYn;
+    // private BlogPostEntity blogPost;
+
+    public BlogImgDTO(Long imgId, Long postId, String geoLat, String geoLong, String fileName, OffsetDateTime imgDtm, String thumbYn) {
         this.imgId = imgId;
         this.postId = postId;
         this.geoLat = geoLat;

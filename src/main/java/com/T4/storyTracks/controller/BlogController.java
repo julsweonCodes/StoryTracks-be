@@ -8,6 +8,7 @@ import com.T4.storyTracks.service.BlogService;
 import com.T4.storyTracks.service.S3Service;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.service.invoker.HttpRequestValues;
 
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class BlogController {
 
     public final BlogRepository blogRepository;
     public final BlogService blogService;
+    private final S3Service s3Service;
     JsonMapper mapper = JsonMapper.builder().configure(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME, true).build();
 
     @PostMapping("/generate")
@@ -42,16 +45,33 @@ public class BlogController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> savePost(@RequestBody NewPostDTO newPostDTO) {
+    public ResponseEntity<?> savePost(
+            @RequestPart("blogPost") NewPostDTO newPostDTO, // JSON 데이터 처리
+            @RequestPart("files") List<MultipartFile> files // 파일 처리
+            ) {
+
         BlogPostDTO postDTO = new BlogPostDTO(newPostDTO.getTitle(), newPostDTO.getOgText(), newPostDTO.getAiGenText());
         BlogPostEntity postEntity = blogService.savePost(postDTO); // insert into post
 
-//        String imgUrl = "";
+        // String imgUrl = "";
         List<Map<String, String>> imgSaveList = new ArrayList<>();
         for (BlogImgDTO imgDTO : newPostDTO.getImgSaveList()) {
             //imgUrl = blogService.saveImgS3(imgDTO, postId);
             blogService.saveImgList(imgDTO, postEntity); // insert into imgs
         }
+
+        // Handle file uploads
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                try {
+                    String fileUrl = s3Service.uploadFile(file, "uploadtest1");
+                    return ResponseEntity.ok(fileUrl);
+                } catch (IOException e) {
+                    return ResponseEntity.status(500).body("Failed to upload file: " + e.getMessage());
+                }
+            }
+        }
+
         return new ResponseEntity<>(postEntity.getPostId(), HttpStatus.OK);
     }
 
