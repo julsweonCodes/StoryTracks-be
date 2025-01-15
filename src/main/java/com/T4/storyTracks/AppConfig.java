@@ -3,6 +3,7 @@ package com.T4.storyTracks;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
@@ -43,7 +44,6 @@ public class AppConfig {
         /*Properties properties = new Properties();
         try (FileInputStream input = new FileInputStream("config.properties")) {
             properties.load(input);
-            System.out.println(properties.getProperty("GEMINI_API_KEY"));
             return RestClient.builder()
                     .baseUrl("https://generativelanguage.googleapis.com")
                     .defaultHeader("x-goog-api-key", System.getenv("GEMINI_API_KEY"))
