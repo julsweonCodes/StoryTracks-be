@@ -66,4 +66,7 @@ jobs:
             echo $AWS_ACCESS_KEY_ID
             echo $AWS_SECRET_ACCESS_KEY
             echo $GEMINI_API_KEY
-            nohup java -jar ~/build/libs/storyTracks-0.0.1-SNAPSHOT.jar > ~/app.log 2>&1 &
+            nohup java -DAWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+                       -DAWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+                       -DGEMINI_API_KEY=$GEMINI_API_KEY \
+                       -jar ~/build/libs/storyTracks-0.0.1-SNAPSHOT.jar > ~/app.log 2>&1 &
