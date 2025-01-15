@@ -23,7 +23,7 @@ public class AppConfig {
             System.out.println(properties.getProperty("GEMINI_API_KEY"));
             return RestClient.builder()
                     .baseUrl("https://generativelanguage.googleapis.com")
-                    .defaultHeader("x-goog-api-key", properties.getProperty("GEMINI_API_KEY"))
+                    .defaultHeader("x-goog-api-key", System.getenv("GEMINI_API_KEY"))
                     .defaultHeader("Content-Type", "application/json")
                     .defaultHeader("Accept", "application/json")
                     .build();
