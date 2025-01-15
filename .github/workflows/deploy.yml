@@ -60,4 +60,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: '22'
           script: |
-            nohup java -jar ~/build/libs/storyTracks-0.0.1-SNAPSHOT.jar > ~/app.log 2>&1 &
+            nohup java -Dconfig.file=~/config.properties -jar ~/build/libs/storyTracks-0.0.1-SNAPSHOT.jar > ~/app.log 2>&1 &
