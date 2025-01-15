@@ -20,6 +20,7 @@ public class AppConfig {
         Properties properties = new Properties();
         try (FileInputStream input = new FileInputStream("config.properties")) {
             properties.load(input);
+            System.out.println(properties.getProperty("GEMINI_API_KEY"));
             return RestClient.builder()
                     .baseUrl("https://generativelanguage.googleapis.com")
                     .defaultHeader("x-goog-api-key", properties.getProperty("GEMINI_API_KEY"))

@@ -44,6 +44,6 @@ logging:
 
 gemini:
   baseurl: https://generativelanguage.googleapis.com
-googleai:
-  api:
-    key: AIzaSyB9pHdfKH_1euOpv1kPrfepDUBoeoMtGwQ
+#googleai:
+#  api:
+#    key: AIzaSyB9pHdfKH_1euOpv1kPrfepDUBoeoMtGwQ
