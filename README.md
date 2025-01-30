@@ -1,61 +1,40 @@
-## Exploring Downtown Vancouver: A Traveler's Perspective
+# About StoryTracks
+### 🤔💭 How we came up with the idea
+<img src="/imgs/1.png" width="50%" height="auto">
+<img src="/imgs/2.png" width="50%" height="auto">
+<img src="/imgs/3.png" width="50%" height="auto">
 
-**Location:** 49.2827 latitude, 123.1207 longitude
+### About this app
 
-**Highlights:**
+StoryTracks is a mobile-centered web application designed to capture and share personal stories through location-based posts. Users can upload pictures from their device, and with the help of metadata like location and time, along with text input or voice-to-text, create unique posts. 
 
-As a traveler, I recently had the pleasure of visiting downtown Vancouver, a vibrant city nestled on the waterfront. Here are some of the highlights of my experience:
+The app uses the Gemini API to automatically generate engaging content for each post. StoryTracks also includes features like user authentication (login and logout), a map feed powered by the Google Maps API to explore posts based on location, and the ability to react to others' stories. Perfect for sharing memories, experiences, and moments on the go!
 
-**Iconic Library Building:**
+Frameworks: Spring Boot(Backend), NextJS(Frontend), AWS(MySQL RDS, Amazon S3)
+<br><br>
 
-The downtown core is home to the extraordinary Vancouver Public Library, an architectural masterpiece that towers over its surroundings. Its unique design and extensive collection of books are a must-visit for any book enthusiast.
+## 🥁 How to use our app
+**🗺️📍 Explore posts based on your location!**
 
-**Clean and Inviting Streets:**
+<img src="/imgs/4.png" width="30%" height="auto"><img src="/imgs/5.png" width="30%" height="auto">
 
-One of the first things I noticed about Vancouver was the exceptional cleanliness of its streets. Wide pedestrian walkways and well-manicured greenery create a pleasant and welcoming environment for both locals and visitors alike.
+<br>
 
-**Sunny Weather:**
+**🔮✨ Share your posts with AI-generated text based on your photos!**
 
-My visit was particularly fortunate to coincide with a stretch of sunny weather. The blue skies and warm temperatures made it ideal for exploring the city and enjoying outdoor activities.
+<img src="/imgs/6.png" width="30%" height="auto"><img src="/imgs/7.png" width="30%" height="auto">
+<br><br>
 
-**Famous Burger Restaurant:**
+Select photos that includes metadata
 
-Vancouver is renowned for its culinary scene, and I was eager to sample some of the local flavors. I stumbled upon a famous burger restaurant and indulged in a delectable lunch. The savory patty and perfectly toasted bun left me craving more.
+<img src="/imgs/8.png" width="auto" height="400px"><img src="/imgs/9.png" width="auto" height="400px">
+<br><br>
 
-**Overall Experience:**
+Enter user content and generate AI text !
 
+<img src="/imgs/10.png" width="25%" height="auto"><img src="/imgs/11.png" width="25%" height="auto"><img src="/imgs/12.png" width="25%" height="auto"><img src="/imgs/13.png" width="25%" height="auto">
+<br><br>
 
-## Exploring Downtown Vancouver: A Vibrant Hub of Culture and Cuisine
-
-Nestled at the coordinates 49.2827° N, 123.1207° W, downtown Vancouver beckons with a captivating blend of architectural wonders, culinary delights, and an invigorating atmosphere. My recent visit to this urban oasis left an indelible mark on my memory.
-
-**Architectural Masterpiece: The Vancouver Public Library**
-
-The Vancouver Public Library stands out as a testament to modern architecture. Its striking design, reminiscent of a futuristic spaceship, is a marvel to behold. The interior boasts an equally impressive array of open and airy spaces, creating a conducive environment for knowledge seekers and bookworms alike.
-
-**Pristine Streets and Sunny Skies**
-
-As I strolled through the streets, the sparkling cleanliness and vibrant atmosphere were immediately noticeable. The sidewalks were spotless, and the air was filled with the cheerful chatter of locals and tourists alike. The golden rays of the sun bathed the city in a warm and inviting glow, enhancing its overall charm.
-
-**Culinary Haven: The Famous Burger Restaurant**
-
-Amidst the many culinary options available, I stumbled upon a highly recommended burger restaurant. The succulent patty, perfectly seasoned and grilled to perfection, was a testament to the city's culinary prowess. The bun was fluffy and soft, providing a delightful contrast to the crispy exterior. The overall dining experience was simply unforgettable.
-
-**Conclusion**
-
-
-## Discovering the Delights of Downtown Vancouver
-
-### Coordinates: 49.2827 N, 123.1207 W
-
-Nestled amidst the vibrant cityscape, downtown Vancouver beckons travelers with its alluring charms. As I embarked on my adventure yesterday, I couldn't help but be captivated by the city's polished facade.
-
-The streets, immaculately clean, led me to the heart of downtown, where the Vancouver Public Library stood as an architectural masterpiece. Its modern exterior and towering form left an undeniable impression.
-
-Wandering through the bustling streets, I noticed a quaint burger restaurant that had garnered much acclaim. Curiosity compelled me to step inside, and I was met with a juicy, delectable burger that exceeded all expectations. The perfect complement to a sunny afternoon stroll.
-
-As I continued my exploration, I marveled at the city's vibrant atmosphere. The locals exuded a friendly and welcoming spirit, eager to share their knowledge and recommendations. The numerous shops and boutiques offered an eclectic mix of finds, catering to every taste and style.
-
-Whether you're a foodie seeking culinary delights, a culture enthusiast yearning for architectural beauty, or simply a traveler searching for a vibrant and welcoming destination, downtown Vancouver is a city that delivers on all fronts. Its cleanliness, warmth, and abundance of attractions make it a perfect getaway for any occasion.
-
-So, if you find yourself yearning for an unforgettable urban experience, consider venturing into the heart of downtown Vancouver. The city's charms await, ready to captivate your senses and create memories that will last a lifetime.
+## Future Updates 
+StoryTracks is a project developed during the KATEC Hackathon as a Minimum Viable Product (MVP) of our idea. <br>While the core features, including location-based posts powered by Google Maps API and AI-generated content via the Gemini API, are fully implemented, other features like user authentication, reacting to posts, and commenting are still a work in progress.
+<br><br>Feel free to use our project as a foundation and enhance it by adding new features, improving functionality, or building on the concept.🥳 <br>We’re excited to see how others can take this idea to the next level!
