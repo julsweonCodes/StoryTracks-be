@@ -13,6 +13,20 @@ The app uses the Gemini API to automatically generate engaging content for each 
 Frameworks: Spring Boot(Backend), NextJS(Frontend), AWS(MySQL RDS, Amazon S3)
 <br><br>
 
+🧱 Repository Structure
+StoryTracks is composed of three modular repositories under the same project umbrella:
+
+StoryTracks-fe
+Frontend built with Next.js. Handles UI/UX, client-side routing, and integration with Google Maps API and Gemini API.
+
+StoryTracks-be
+Backend built with Spring Boot. Manages authentication, post processing, and business logic.
+
+StoryTracks-infra
+Infrastructure-as-Code and deployment settings. Includes AWS setup, database configuration, and CI/CD pipelines.
+
+This structure allows each part of the application to be developed and maintained independently while ensuring smooth integration across services.
+
 ## 🥁 How to use our app
 **🗺️📍 Explore posts based on your location!**
 
