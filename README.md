@@ -13,7 +13,7 @@ The app uses the Gemini API to automatically generate engaging content for each 
 Frameworks: Spring Boot(Backend), NextJS(Frontend), AWS(MySQL RDS, Amazon S3)
 <br><br>
 
-🧱 Repository Structure
+### 🧱 Repository Structure
 StoryTracks is composed of three modular repositories under the same project umbrella:
 
 StoryTracks-fe
