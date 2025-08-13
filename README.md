@@ -1,4 +1,4 @@
-###[🇰🇷 한국어로 바로가기](s#torytracks-kor)  
+###[🇰🇷 한국어로 바로가기](#storytracks-kor)  
 <br>
 
 # About StoryTracks
